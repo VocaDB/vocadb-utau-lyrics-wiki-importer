@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>UTAU Lyrics Wiki importer</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<style>
+
+	</style>
+</head>
+
+<body>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<form class="form-inline">
+					<h1>UTAU Lyrics Wiki importer</h1>
+					<div class="form-group">
+						<input type="text" data-bind="textInput: url" class="form-control" id="url" placeholder="UTAU Lyrics Wiki URL">
+						<button type="submit" data-bind="click: loadUrl" class="btn btn-primary">Load</button>
+					</div>
+					<hr />
+				</form>
+				<form>
+					<h3>Title</h3>
+					<div>
+						Original: <input type="text" data-bind="textInput: originalTitle" readonly />
+					</div>
+					<h3>Media</h3>
+					<div data-bind="foreach: media">
+						<a data-bind="visible: website === 'yt', text: id, attr: { href: 'https://youtu.be/' + id }"></a>
+						<a data-bind="visible: website === 'nn', text: id, attr: { href: 'http://nicovideo.jp/watch/' + id }"></a>
+					</div>
+					<h3>Raw JSON</h3>
+					<pre data-bind="text: result">						
+					</pre>
+				</form>
+			</div>
+		</div>		
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
