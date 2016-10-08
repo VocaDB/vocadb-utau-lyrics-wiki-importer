@@ -20,23 +20,51 @@
 					</div>
 					<hr />
 				</form>
-				<form>
+				<form data-bind="with: result">
 					<h3>Title</h3>
 					<div>
-						Original: <input type="text" data-bind="textInput: originalTitle" readonly />
+						Original: <input type="text" data-bind="textInput: names.original" readonly /><br />
+						Romanized: <input type="text" data-bind="textInput: names.romanized" readonly /><br />
+						English: <input type="text" data-bind="textInput: names.english" readonly />
 					</div>
+
 					<h3>Media</h3>
 					<div data-bind="foreach: media">
-						<a data-bind="visible: website === 'yt', text: id, attr: { href: 'https://youtu.be/' + id }"></a>
-						<a data-bind="visible: website === 'nn', text: id, attr: { href: 'http://nicovideo.jp/watch/' + id }"></a>
+						<a data-bind="visible: website === 'yt', text: 'YouTube', attr: { href: 'https://youtu.be/' + id }"></a>
+						<a data-bind="visible: website === 'nn', text: 'NicoNicoDouga', attr: { href: 'http://nicovideo.jp/watch/' + id }"></a>
+						<a data-bind="visible: website === 'pp', text: 'Piapro', attr: { href: 'http://piapro.jp/t/' + id }"></a>
 					</div>
-					<h3>Raw JSON</h3>
-					<pre data-bind="text: result">						
-					</pre>
+
+					<!-- ko if: $data.producers -->
+					<h3>Producers</h3>
+					<div data-bind="template: { name: 'artists-template', data: producers }"></div>
+					<!-- /ko -->
+
+					<!-- ko if: $data.vocalists -->
+					<h3>Vocalists</h3>
+					<div data-bind="template: { name: 'artists-template', data: vocalists }"></div>
+					<!-- /ko -->
+
+					<!-- ko if: lyrics && (lyrics.ja || lyrics['ja-romanized']) -->
+					<h3>Lyrics</h3>
+					<ul>
+						<li data-bind="visible: $data.ja">Original (Japanese)</li>
+						<li data-bind="visible: $data['ja-romanized']">Romanized</li>
+					</ul>
+					<!-- /ko -->
 				</form>
 			</div>
 		</div>		
 	</div>
+
+	<script type="text/html" id="artists-template">
+		<ul data-bind="foreach: $data">
+			<li>
+				<a data-bind="visible: $data.vocadb, text: name + ($data.roles ? ' (' + roles + ')': ''), attr: { href: 'http://vocadb.net/Ar/' + $data.vocadb }"></a>
+				<span data-bind="visible: !$data.vocadb, text: name + ($data.roles ? ' (' + roles + ')': '')"></span>
+			</li>
+		</ul>
+	</script>
 
 	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
