@@ -12,11 +12,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<form class="form-inline">
-					<h1>UTAU Lyrics Wiki importer</h1>
-					<div class="form-group">
+				<h1>UTAU Lyrics Wiki importer</h1>
+				<form class="form-horizontal">
+					<div class="input-group">
 						<input type="text" data-bind="textInput: url" class="form-control" id="url" placeholder="UTAU Lyrics Wiki URL">
-						<button type="submit" data-bind="click: loadUrl" class="btn btn-primary">Load</button>
+						<span class="input-group-btn">
+							<button type="submit" data-bind="click: loadUrl" class="btn btn-primary">Load</button>
+						</span>
 					</div>
 					<hr />
 				</form>
@@ -29,11 +31,11 @@
 					</div>
 
 					<h3>Media</h3>
-					<div data-bind="foreach: media">
-						<a data-bind="visible: website === 'yt', text: 'YouTube', attr: { href: 'https://youtu.be/' + id }"></a>
-						<a data-bind="visible: website === 'nn', text: 'NicoNicoDouga', attr: { href: 'http://nicovideo.jp/watch/' + id }"></a>
-						<a data-bind="visible: website === 'pp', text: 'Piapro', attr: { href: 'http://piapro.jp/t/' + id }"></a>
-					</div>
+					<ul data-bind="foreach: media">
+						<li data-bind="visible: website === 'yt'"><a data-bind="text: 'YouTube', attr: { href: 'https://youtu.be/' + id }"></a></li>
+						<li data-bind="visible: website === 'nn'"><a data-bind="text: 'NicoNicoDouga', attr: { href: 'http://nicovideo.jp/watch/' + id }"></a></li>
+						<li data-bind="visible: website === 'pp'"><a data-bind="text: 'Piapro', attr: { href: 'http://piapro.jp/t/' + id }"></a></li>
+					</ul>
 
 					<!-- ko if: $data.producers -->
 					<h3>Producers</h3>
@@ -48,8 +50,8 @@
 					<!-- ko if: lyrics && (lyrics.ja || lyrics['ja-romanized']) -->
 					<h3>Lyrics</h3>
 					<ul>
-						<li data-bind="visible: $data.ja">Original (Japanese)</li>
-						<li data-bind="visible: $data['ja-romanized']">Romanized</li>
+						<li data-bind="visible: lyrics.ja">Original (Japanese)</li>
+						<li data-bind="visible: lyrics['ja-romanized']">Romanized</li>
 					</ul>
 					<!-- /ko -->
 				</form>
