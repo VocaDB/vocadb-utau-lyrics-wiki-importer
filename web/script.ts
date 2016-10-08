@@ -7,20 +7,13 @@ class ViewModel {
 		var regex = /http:\/\/utaulyrics\.wikia\.com\/wiki\/(.+)/g;
 		var match = regex.exec(this.url());
 
-		if (match && match.length < 2)
+		if (!match || match.length < 2)
 			return;
 
 		var pagename = match[1];
 
-		$.get("http://vocaloid.eu/utaulyricswiki/api/lyrics-wiki?pagename=" + pagename, null, result => {
-
-			if (!result)
-				return;
-
-			var parsed: LyricsWikiResult = JSON.parse(result);
-
-			this.result(parsed);
-
+		$.get("http://vocaloid.eu/utaulyricswiki/api/lyrics-wiki?pagename=" + pagename, (result: LyricsWikiResult) => {
+			this.result(result);
 		});
 
 	}
