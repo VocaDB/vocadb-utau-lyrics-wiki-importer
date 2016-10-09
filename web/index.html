@@ -28,7 +28,11 @@
 				<div class="alert alert-danger" data-bind="visible: !loggedIn()">
 					You must be logged in to VocaDB to use this page. 
 					<a href="http://vocadb.net/User/Login">Log in here.</a>
-				</div>				
+				</div>	
+				
+				<div class="alert alert-success" data-bind="visible: submittedSongId">
+					<a data-bind="attr: { href: 'http://vocadb.net/S/' + submittedSongId() }">Submitted to VocaDB.</a>					
+				</div>			
 
 				<form class="form-horizontal" data-bind="visible: user">
 					<div class="input-group">
@@ -41,7 +45,7 @@
 				</form>
 				
 				<form data-bind="with: result, submit: submit">
-					<div class="alert alert-info" data-bind="visible: vocadb">
+					<div class="alert alert-info" data-bind="visible: $data.vocadb">
 						<a data-bind="attr: { href: 'http://vocadb.net/S/' + $data.vocadb }">This song is already on VocaDB.</a>
 					</div>
 					
@@ -76,8 +80,16 @@
 						<li data-bind="visible: lyrics['ja-romanized']">Romanized</li>
 					</ul>
 					<!-- /ko -->
-					
-					<button data-bind="enable: !$parent.submitting()" class="btn btn-primary" type="submit">Submit to VocaDB</button>
+
+					<p>
+						<button data-bind="enable: !$parent.submitting()" class="btn btn-primary" type="submit">Submit to VocaDB</button>
+					</p>
+										
+					<div class="alert alert-danger" data-bind="visible: $root.submitError">
+						Failed to submit song:
+						<span data-bind="text: $root.submitError"></span>
+					</div>			
+
 				</form>
 			</div>
 		</div>		

@@ -10,7 +10,7 @@ class ViewModel {
 			}
 		});
 
-		$.getJSON("https://vocadb.net/api/users/current", user => this.user(user)).fail(() => this.loggedIn(false));
+		$.getJSON(this.vocaDbApiRoot + "/api/users/current", user => this.user(user)).fail(() => this.loggedIn(false));
 
 	}
 
@@ -117,15 +117,35 @@ class ViewModel {
 			updateNotes: "Imported from UTAU Lyrics Wiki"
 		};
 
+		this.submitError(null);
 		this.submitting(true);
 
-		$.post("https://vocadb.net/api/songs", song).always(() => this.submitting(false));
+		$.ajax(this.vocaDbApiRoot + "/api/songs", {
+			data: JSON.stringify(song),
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: result => {
+				this.submittedSongId(result.id);
+				this.result(null);
+			}
+		})
+		.fail((xhr: JQueryXHR) => {
+			this.submitError(xhr.responseText);
+		})
+		.always(() => this.submitting(false));
 
 	}
+
+	public submitError = ko.observable<string>(null);
+
+	public submittedSongId = ko.observable<number>(null);
 
 	public url = ko.observable("");
 
 	public user = ko.observable(null);
+
+	private vocaDbApiRoot = "http://localhost:39390"
 
 }
 
