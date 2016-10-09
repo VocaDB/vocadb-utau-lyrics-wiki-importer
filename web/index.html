@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>UTAU Lyrics Wiki importer</title>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<style>
 
 	</style>
@@ -9,11 +9,28 @@
 
 <body>
 	
-	<div class="container">
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<p data-bind="visible: !loggedIn()" class="navbar-text navbar-right">
+				<a class="navbar-link" href="http://vocadb.net/User/Login">Log in to VocaDB</a>
+			</p>
+			<p data-bind="with: user" class="navbar-text navbar-right">
+				Logged in to VocaDB as <span data-bind="text: name"></span>
+			</p>
+		</div>
+	</nav>
+
+	<div class="container" style="display: none;" data-bind="visible: true">
 		<div class="row">
 			<div class="col-sm-12">
 				<h1>UTAU Lyrics Wiki importer</h1>
-				<form class="form-horizontal">
+				
+				<div class="alert alert-danger" data-bind="visible: !loggedIn()">
+					You must be logged in to VocaDB to use this page. 
+					<a href="http://vocadb.net/User/Login">Log in here.</a>
+				</div>				
+
+				<form class="form-horizontal" data-bind="visible: user">
 					<div class="input-group">
 						<input type="text" data-bind="textInput: url" class="form-control" id="url" placeholder="UTAU Lyrics Wiki URL">
 						<span class="input-group-btn">
@@ -22,7 +39,12 @@
 					</div>
 					<hr />
 				</form>
+				
 				<form data-bind="with: result">
+					<div class="alert alert-info" data-bind="visible: vocadb">
+						<a data-bind="attr: { href: 'http://vocadb.net/S/' + $data.vocadb }">This song is already on VocaDB.</a>
+					</div>
+					
 					<h3>Title</h3>
 					<div>
 						Original: <input type="text" data-bind="textInput: names.original" readonly /><br />

@@ -4,6 +4,7 @@ interface LyricsWikiResult {
 	producers: Artist[];
 	vocalists: Artist[];	
 	names: Names;
+	vocadb?: number;
 }
 
 interface Lyrics {
