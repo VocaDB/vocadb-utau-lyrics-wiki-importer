@@ -24,7 +24,7 @@ declare namespace utaulyrics {
 	type ArtistRole = "music" | "lyrics" | "mastering" | "illustration" | "vocalist";
 
 	interface Artist {
-		vocadb?: number;
+		vocadb?: string;
 		roles: ArtistRole[];
 		name: string;
 	}

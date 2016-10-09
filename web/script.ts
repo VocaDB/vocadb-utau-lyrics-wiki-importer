@@ -32,11 +32,13 @@ class ViewModel {
 			.value();
 
 		var vdbArtist: vdb.ArtistForSongContract = {
-			artist: (artist.vocadb ? { id: artist.vocadb } : null),
+			artist: (artist.vocadb ? { id: parseInt(artist.vocadb) } : null),
 			isSupport: false,
 			name: artist.name,
 			roles: roles
 		};
+
+		return vdbArtist;
 
 	}
 
@@ -82,23 +84,30 @@ class ViewModel {
 
 	public submit = () => {
 
-		var artists = _
+		// Append vocalist role to vocalists
+		var vocalists: utaulyrics.Artist[] = _.map(this.result().vocalists, v => _.assign({ roles: ["vocalist"] }, v));
+
+		// Get VocaDB artist links
+		var artists: vdb.ArtistForSongContract[] = _
 			.chain(this.result().producers)
-			.concat(_.map(this.result().vocalists, v => {
-				return { vocadb: v.vocadb, name: v.name, roles: 'vocalist' }
-			}))
+			.concat(vocalists)
+			.map(a => this.getArtistContract(a))
 			.value();
+
+		var createName = (value: string, language: vdb.Language) => {
+			return { value: value, language: language } as vdb.LocalizedStringContract;
+		};
 
 		var names: vdb.LocalizedStringContract[] = _
 			.chain([
-				{ value: this.result().names.original, language: "Japanese" } as vdb.LocalizedStringContract,
-				{ value: this.result().names.romanized, language: "Romaji" } as vdb.LocalizedStringContract,
-				{ value: this.result().names.english, language: "English" } as vdb.LocalizedStringContract
+				createName(this.result().names.original, "Japanese"),
+				createName(this.result().names.romanized, "Romaji"),
+				createName(this.result().names.english, "English")
 			])
 			.filter(n => n.value != null)
 			.value();
 
-		var pvUrl = this.result().media.length ? this.getPvUrl(this.result().media[0]) : null;
+		var pvUrl: string = this.result().media.length ? this.getPvUrl(this.result().media[0]) : null;
 
 		var song: vdb.CreateSongContract = {
 			artists: artists,

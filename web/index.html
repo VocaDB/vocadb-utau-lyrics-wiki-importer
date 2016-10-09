@@ -54,9 +54,9 @@
 
 					<h3>Media</h3>
 					<ul data-bind="foreach: media">
-						<li data-bind="visible: website === 'yt'"><a data-bind="text: 'YouTube', attr: { href: $parent.getPvUrl($data) }"></a></li>
-						<li data-bind="visible: website === 'nn'"><a data-bind="text: 'NicoNicoDouga', attr: { href: $parent.getPvUrl($data) }"></a></li>
-						<li data-bind="visible: website === 'pp'"><a data-bind="text: 'Piapro', attr: { href: $parent.getPvUrl($data) }"></a></li>
+						<li data-bind="visible: website === 'yt'"><a data-bind="text: 'YouTube', attr: { href: $root.getPvUrl($data) }"></a></li>
+						<li data-bind="visible: website === 'nn'"><a data-bind="text: 'NicoNicoDouga', attr: { href: $root.getPvUrl($data) }"></a></li>
+						<li data-bind="visible: website === 'pp'"><a data-bind="text: 'Piapro', attr: { href: $root.getPvUrl($data) }"></a></li>
 					</ul>
 
 					<!-- ko if: $data.producers -->
@@ -77,7 +77,7 @@
 					</ul>
 					<!-- /ko -->
 					
-					<button data-bind="enable: !submitting()" class="btn btn-primary" type="submit">Submit to VocaDB</button>
+					<button data-bind="enable: !$parent.submitting()" class="btn btn-primary" type="submit">Submit to VocaDB</button>
 				</form>
 			</div>
 		</div>		
