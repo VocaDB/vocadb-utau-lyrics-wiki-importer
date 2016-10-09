@@ -1,30 +1,38 @@
-interface LyricsWikiResult {
-	lyrics: Lyrics;
-	media: Media[];
-	producers: Artist[];
-	vocalists: Artist[];	
-	names: Names;
-	vocadb?: number;
-}
+declare namespace utaulyrics {
 
-interface Lyrics {
-	"ja-romanized"?: string;
-	"ja"?: string;
-}
+	interface LyricsWikiResult {
+		lyrics: Lyrics;
+		media: Media[];
+		producers: Artist[];
+		vocalists: Artist[];
+		names: Names;
+		vocadb?: number;
+	}
 
-interface Media {
-	id: string;
-	website: "yt" | "nn" | "pp";
-}
+	interface Lyrics {
+		"ja-romanized"?: string;
+		"ja"?: string;
+	}
 
-interface Artist {
-	vocadb?: string;
-	roles: string[];
-	name: string;
-}
+	type MediaService = "yt" | "nn" | "pp";
 
-interface Names {
-	romanized?: string;
-	original: string;
-	english?: string;
+	interface Media {
+		id: string;
+		website: MediaService;
+	}
+
+	type ArtistRole = "music" | "lyrics" | "mastering" | "illustration" | "vocalist";
+
+	interface Artist {
+		vocadb?: number;
+		roles: ArtistRole[];
+		name: string;
+	}
+
+	interface Names {
+		romanized?: string;
+		original: string;
+		english?: string;
+	}
+
 }

@@ -11,6 +11,7 @@
 		"typings/knockout.d.ts",
 		"typings/lodash.d.ts",
 		"typings/utaulyrics.d.ts",
+		"typings/vocadb.d.ts",
 		"script.ts"
 	]
 }

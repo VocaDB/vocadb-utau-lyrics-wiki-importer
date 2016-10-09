@@ -40,7 +40,7 @@
 					<hr />
 				</form>
 				
-				<form data-bind="with: result">
+				<form data-bind="with: result, submit: submit">
 					<div class="alert alert-info" data-bind="visible: vocadb">
 						<a data-bind="attr: { href: 'http://vocadb.net/S/' + $data.vocadb }">This song is already on VocaDB.</a>
 					</div>
@@ -54,9 +54,9 @@
 
 					<h3>Media</h3>
 					<ul data-bind="foreach: media">
-						<li data-bind="visible: website === 'yt'"><a data-bind="text: 'YouTube', attr: { href: 'https://youtu.be/' + id }"></a></li>
-						<li data-bind="visible: website === 'nn'"><a data-bind="text: 'NicoNicoDouga', attr: { href: 'http://nicovideo.jp/watch/' + id }"></a></li>
-						<li data-bind="visible: website === 'pp'"><a data-bind="text: 'Piapro', attr: { href: 'http://piapro.jp/t/' + id }"></a></li>
+						<li data-bind="visible: website === 'yt'"><a data-bind="text: 'YouTube', attr: { href: $parent.getPvUrl($data) }"></a></li>
+						<li data-bind="visible: website === 'nn'"><a data-bind="text: 'NicoNicoDouga', attr: { href: $parent.getPvUrl($data) }"></a></li>
+						<li data-bind="visible: website === 'pp'"><a data-bind="text: 'Piapro', attr: { href: $parent.getPvUrl($data) }"></a></li>
 					</ul>
 
 					<!-- ko if: $data.producers -->
@@ -76,6 +76,8 @@
 						<li data-bind="visible: lyrics['ja-romanized']">Romanized</li>
 					</ul>
 					<!-- /ko -->
+					
+					<button data-bind="enable: !submitting()" class="btn btn-primary" type="submit">Submit to VocaDB</button>
 				</form>
 			</div>
 		</div>		
