@@ -145,7 +145,7 @@ class ViewModel {
 
 	public user = ko.observable(null);
 
-	private vocaDbApiRoot = "http://localhost:39390"
+	private vocaDbApiRoot = "https://vocadb.net/api"
 
 }
 
