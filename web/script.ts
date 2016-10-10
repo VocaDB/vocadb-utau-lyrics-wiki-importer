@@ -16,8 +16,9 @@ class ViewModel {
 
 	private getArtistContract = (artist: utaulyrics.Artist) => {
 
-		var roleMap: { [role: string]: string; } = {
+		var roleMap: { [role: string]: vdb.ArtistRole; } = {
 			"music": "Composer",
+			"arrangement": "Arranger",
 			"lyrics": "Lyricist",
 			"mastering": "Mastering",
 			"illustration": "Illustrator",
@@ -145,7 +146,8 @@ class ViewModel {
 
 	public user = ko.observable(null);
 
-	private vocaDbApiRoot = "https://vocadb.net/api"
+	private vocaDbApiRoot = "https://vocadb.net";
+	//private vocaDbApiRoot = "http://localhost:39390";
 
 }
 

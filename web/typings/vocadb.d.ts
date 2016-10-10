@@ -9,6 +9,8 @@ declare namespace vdb {
 		updateNotes?: string;
 	}
 
+	type ArtistRole = "Composer" | "Arranger" | "Lyricist" | "Mastering" | "Illustrator" | "Vocalist";
+
 	type Language = "Unspecified" | "Japanese" | "Romaji" | "English";
 
 	interface LocalizedStringContract {

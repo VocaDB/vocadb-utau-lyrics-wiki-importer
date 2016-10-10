@@ -73,11 +73,10 @@
 					<div data-bind="template: { name: 'artists-template', data: vocalists }"></div>
 					<!-- /ko -->
 
-					<!-- ko if: lyrics && (lyrics.ja || lyrics['ja-romanized']) -->
+					<!-- ko if: $data.lyrics -->
 					<h3>Lyrics</h3>
-					<ul>
-						<li data-bind="visible: lyrics.ja">Original (Japanese)</li>
-						<li data-bind="visible: lyrics['ja-romanized']">Romanized</li>
+					<ul data-bind="foreach: lyrics">
+						<li data-bind="text: type + ($data.lang ? ' (' + $data.lang + ')' : '')"></li>
 					</ul>
 					<!-- /ko -->
 

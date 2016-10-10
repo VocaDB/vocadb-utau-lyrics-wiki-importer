@@ -10,8 +10,9 @@ declare namespace utaulyrics {
 	}
 
 	interface Lyrics {
-		"ja-romanized"?: string;
-		"ja"?: string;
+		lang: string;
+		text: string;
+		type: "original" | "romanized" | "translation";
 	}
 
 	type MediaService = "yt" | "nn" | "pp";
@@ -21,7 +22,7 @@ declare namespace utaulyrics {
 		website: MediaService;
 	}
 
-	type ArtistRole = "music" | "lyrics" | "mastering" | "illustration" | "vocalist";
+	type ArtistRole = "music" | "arrangement" | "lyrics" | "mastering" | "illustration" | "vocalist";
 
 	interface Artist {
 		vocadb?: string;
