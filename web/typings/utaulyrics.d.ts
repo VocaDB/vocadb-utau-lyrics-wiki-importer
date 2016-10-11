@@ -1,7 +1,7 @@
 declare namespace utaulyrics {
 
 	interface LyricsWikiResult {
-		lyrics: Lyrics;
+		lyrics: Lyrics[];
 		media: Media[];
 		producers: Artist[];
 		vocalists: Artist[];

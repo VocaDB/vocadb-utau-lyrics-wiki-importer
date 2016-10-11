@@ -79,6 +79,24 @@ class ViewModel {
 
 	public loggedIn = ko.observable(true);
 
+	private mapLyrics = (lyrics: utaulyrics.Lyrics) => {
+
+		var typeMap: { [lang: string]: vdb.TranslationType; } = {
+			original: "Original",
+			romanized: "Romanized",
+			translation: "Translation"
+		};
+
+		var knownLanguages = ["en", "ja"];
+
+		return {
+			value: lyrics.text,
+			translationType: typeMap[lyrics.type] || "Translation",
+			cultureCode: _.includes(knownLanguages, lyrics.lang) ? lyrics.lang : null
+		} as vdb.Lyrics;
+
+	}
+
 	public result = ko.observable<utaulyrics.LyricsWikiResult>(null);
 
 	public submitting = ko.observable(false);
@@ -110,12 +128,20 @@ class ViewModel {
 
 		var pvUrl: string = this.result().media.length ? this.getPvUrl(this.result().media[0]) : null;
 
+		var lyrics: vdb.Lyrics[] = _.map(this.result().lyrics, this.mapLyrics);
+
+		var webLinks: vdb.WebLink[] = [
+			{ url: this.url(), description: "UTAU Lyrics Wiki", category: "Reference" }
+		];
+
 		var song: vdb.CreateSongContract = {
 			artists: artists,
+			lyrics: lyrics,
 			names: names,
 			pvUrl: pvUrl,
 			songType: "Original",
-			updateNotes: "Imported from UTAU Lyrics Wiki"
+			updateNotes: "Imported from UTAU Lyrics Wiki",
+			webLinks: webLinks
 		};
 
 		this.submitError(null);
