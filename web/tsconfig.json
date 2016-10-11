@@ -13,6 +13,7 @@
 		"typings/utaulyrics.d.ts",
 		"typings/vocadb.d.ts",
 		"mapper.ts",
-		"script.ts"
+		"viewModel.ts",
+		"app.ts"
 	]
 }

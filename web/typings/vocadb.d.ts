@@ -2,9 +2,9 @@
 declare namespace vdb {
 
 	interface CreateSongContract {
-		artists: ArtistForSongContract[];
+		artists: ArtistForSong[];
 		lyrics?: Lyrics[];
-		names: LocalizedStringContract[];
+		names: LocalizedString[];
 		pvUrl?: string;
 		songType: "Original" | "Cover" | "Remix";
 		updateNotes?: string;
@@ -15,19 +15,19 @@ declare namespace vdb {
 
 	type Language = "Unspecified" | "Japanese" | "Romaji" | "English";
 
-	interface LocalizedStringContract {
+	interface LocalizedString {
 		language: Language;
 		value: string;
 	}
 
-	interface ArtistForSongContract {
-		artist?: ArtistContract;
+	interface ArtistForSong {
+		artist?: Artist;
 		isSupport?: boolean;
 		name?: string;
 		roles?: string;
 	}
 
-	interface ArtistContract {
+	interface Artist {
 		id?: number;
 	}
 
