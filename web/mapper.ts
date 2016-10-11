@@ -1,5 +1,5 @@
 
-public class Mapper {
+class Mapper {
 
 	public getPvUrl = (pv: utaulyrics.Media) => {
 
@@ -101,6 +101,8 @@ public class Mapper {
 			updateNotes: "Imported from UTAU Lyrics Wiki",
 			webLinks: webLinks
 		};
+
+		return song;
 
 	}
 
