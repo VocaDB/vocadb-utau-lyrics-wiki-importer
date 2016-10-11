@@ -60,7 +60,7 @@ namespace mapper {
 
 		}
 
-		public mapSong = (result: utaulyrics.LyricsWikiResult, url: string) => {
+		public mapSong = (result: utaulyrics.Song, url: string) => {
 
 			// Append vocalist role to vocalists
 			var vocalists: utaulyrics.Artist[] = _.map(result.vocalists, v => _.assign({ roles: ["vocalist"] }, v));

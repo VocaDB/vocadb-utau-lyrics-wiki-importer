@@ -1,6 +1,6 @@
 declare namespace utaulyrics {
 
-	interface LyricsWikiResult {
+	interface Song {
 		lyrics: Lyrics[];
 		media: Media[];
 		producers: Artist[];

@@ -34,7 +34,7 @@ namespace mapper {
 				xhrFields: {
 					withCredentials: false
 				},
-				success: (result: utaulyrics.LyricsWikiResult) => {
+				success: (result: utaulyrics.Song) => {
 					this.result(result);
 				},
 				dataType: 'json'
@@ -46,7 +46,7 @@ namespace mapper {
 
 		private mapper = new Mapper();
 
-		public result = ko.observable<utaulyrics.LyricsWikiResult>(null);
+		public result = ko.observable<utaulyrics.Song>(null);
 
 		public submitting = ko.observable(false);
 
