@@ -31,7 +31,7 @@
 				</div>	
 				
 				<div class="alert alert-success" data-bind="visible: submittedSongId">
-					<a data-bind="attr: { href: 'http://vocadb.net/S/' + submittedSongId() }">Submitted to VocaDB.</a>					
+					<a data-bind="attr: { href: vocaDbApiRoot + '/S/' + submittedSongId() }">Submitted to VocaDB.</a>					
 				</div>			
 
 				<form class="form-horizontal" data-bind="visible: user">
@@ -51,9 +51,9 @@
 					
 					<h3>Title</h3>
 					<div>
-						Original: <input type="text" data-bind="textInput: names.original" readonly /><br />
-						Romanized: <input type="text" data-bind="textInput: names.romanized" readonly /><br />
-						English: <input type="text" data-bind="textInput: names.english" readonly />
+						Original: <input type="text" data-bind="textInput: names.original" /><br />
+						Romanized: <input type="text" data-bind="textInput: names.romanized" /><br />
+						English: <input type="text" data-bind="textInput: names.english" />
 					</div>
 
 					<h3>Media</h3>

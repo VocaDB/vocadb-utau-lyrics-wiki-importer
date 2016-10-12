@@ -21,6 +21,8 @@ namespace mapper {
 
 		public loadUrl = () => {
 
+			this.submitError(null);
+
 			// http://utaulyrics.wikia.com/wiki/A_Lonely_Amusement
 			var regex = /http:\/\/utaulyrics\.wikia\.com\/wiki\/(.+)/g;
 			var match = regex.exec(this.url());
