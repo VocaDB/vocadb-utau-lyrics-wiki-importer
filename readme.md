@@ -1,3 +1,3 @@
-Tool for importing songs from [http://utaulyrics.wikia.com/](UTAU Lyrics Wiki) to [http://vocadb.net](VocaDB).
+Tool for importing songs from [UTAU Lyrics Wiki](http://utaulyrics.wikia.com/) to [VocaDB](http://vocadb.net).
 
 Code licensed under MIT.
