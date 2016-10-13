@@ -91,8 +91,8 @@ namespace mapper {
 
 		public user = ko.observable(null);
 
-		//private vocaDbApiRoot = "https://vocadb.net";
-		private vocaDbApiRoot = "http://localhost:39390";
+		private vocaDbApiRoot = "https://vocadb.net";
+		//private vocaDbApiRoot = "http://localhost:39390";
 
 	}
 
