@@ -15,6 +15,8 @@ namespace mapper {
 
 		}
 
+		public artists = ko.observableArray<ArtistViewModel>([]);
+
 		public getPvUrl = (pv: utaulyrics.Media) => {
 			return this.mapper.getPvUrl(pv);
 		}
@@ -22,6 +24,7 @@ namespace mapper {
 		public loadUrl = () => {
 
 			this.submitError(null);
+			this.submittedSongId(null);
 
 			// http://utaulyrics.wikia.com/wiki/A_Lonely_Amusement
 			var regex = /http:\/\/utaulyrics\.wikia\.com\/wiki\/(.+)/g;
@@ -37,6 +40,9 @@ namespace mapper {
 					withCredentials: false
 				},
 				success: (result: utaulyrics.Song) => {
+					if (result) {
+						this.artists(_.map(this.mapper.mapArtists(result.producers, result.vocalists), a => new ArtistViewModel(a, this.vocaDbApiRoot)));
+					}
 					this.result(result);
 				},
 				dataType: 'json'
@@ -54,7 +60,8 @@ namespace mapper {
 
 		public submit = () => {
 
-			var song = this.mapper.mapSong(this.result(), this.url());
+			var artists = _.map(this.artists(), a => a.toVocaDb());
+			var song = this.mapper.mapSong(this.result(), artists, this.url());
 
 			this.submitError(null);
 			this.submitting(true);
@@ -84,9 +91,46 @@ namespace mapper {
 
 		public user = ko.observable(null);
 
-		private vocaDbApiRoot = "https://vocadb.net";
-		//private vocaDbApiRoot = "http://localhost:39390";
+		//private vocaDbApiRoot = "https://vocadb.net";
+		private vocaDbApiRoot = "http://localhost:39390";
 
+	}
+
+	class ArtistViewModel {
+
+		constructor(artist: vdb.ArtistForSong, root: string) {
+			this.name = artist.name;
+			this.roles = artist.roles;
+			this.vocaDbId = ko.observable(artist.artist ? artist.artist.id : null);
+			this.vocaDbName = ko.observable(artist.artist ? artist.name : null);
+			this.editable = !this.vocaDbId();
+			this.url = ko.computed(() => root + "/Ar/" + this.vocaDbId());
+			this.artist = ko.computed({
+				read: () => { return { id: this.vocaDbId(), name: this.vocaDbName() } },
+				write: (artist) => {
+					this.vocaDbId(artist ? artist.id : null);
+					this.vocaDbName(artist ? artist.name : null);
+				}
+			});
+		}
+
+		public remove = () => {
+			this.artist(null);
+			this.autoCompleteName(null);
+		}
+
+		public toVocaDb = () => {
+			return { artist: this.artist() && this.artist().id ? this.artist() : null, name: this.name, roles: this.roles, isSupport: false } as vdb.ArtistForSong;
+		}
+
+		public artist: KnockoutComputed<vdb.Artist>;
+		public autoCompleteName = ko.observable(null);
+		public editable: boolean;
+		public name: string;
+		public roles: string;
+		public url: KnockoutComputed<string>;
+		public vocaDbId: KnockoutObservable<number>;
+		public vocaDbName: KnockoutObservable<string>;
 	}
 
 }

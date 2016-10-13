@@ -22,7 +22,7 @@ declare namespace utaulyrics {
 		website: MediaService;
 	}
 
-	type ArtistRole = "music" | "arrangement" | "lyrics" | "mastering" | "illustration" | "vocalist";
+	type ArtistRole = "music" | "arrangement" | "lyrics" | "mastering" | "movie" | "illustration" | "vocalist";
 
 	interface Artist {
 		vocadb?: string;

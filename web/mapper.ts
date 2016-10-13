@@ -17,6 +17,7 @@ namespace mapper {
 
 			var roleMap: { [role: string]: vdb.ArtistRole; } = {
 				"music": "Composer",
+				"movie": "Animator",
 				"arrangement": "Arranger",
 				"lyrics": "Lyricist",
 				"mastering": "Mastering",
@@ -42,6 +43,22 @@ namespace mapper {
 
 		}
 
+		public mapArtists = (producers: utaulyrics.Artist[], vocalists: utaulyrics.Artist[]) => {
+
+			// Append vocalist role to vocalists
+			vocalists = _.map(vocalists, v => _.assign({ roles: ["vocalist"] }, v));
+
+			// Get VocaDB artist links
+			var artists: vdb.ArtistForSong[] = _
+				.chain(producers)
+				.concat(vocalists)
+				.map(a => this.mapArtist(a))
+				.value();
+
+			return artists;
+
+		}
+
 		private mapLyrics = (lyrics: utaulyrics.Lyrics) => {
 
 			var typeMap: { [lang: string]: vdb.TranslationType; } = {
@@ -60,17 +77,7 @@ namespace mapper {
 
 		}
 
-		public mapSong = (result: utaulyrics.Song, url: string) => {
-
-			// Append vocalist role to vocalists
-			var vocalists: utaulyrics.Artist[] = _.map(result.vocalists, v => _.assign({ roles: ["vocalist"] }, v));
-
-			// Get VocaDB artist links
-			var artists: vdb.ArtistForSong[] = _
-				.chain(result.producers)
-				.concat(vocalists)
-				.map(a => this.mapArtist(a))
-				.value();
+		public mapSong = (result: utaulyrics.Song, artists: vdb.ArtistForSong[], url: string) => {
 
 			var createName = (value: string, language: vdb.Language) => {
 				return { value: value, language: language } as vdb.LocalizedString;

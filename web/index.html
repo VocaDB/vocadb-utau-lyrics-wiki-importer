@@ -62,16 +62,37 @@
 						<li data-bind="visible: website === 'nn'"><a data-bind="text: 'NicoNicoDouga', attr: { href: $root.getPvUrl($data) }"></a></li>
 						<li data-bind="visible: website === 'pp'"><a data-bind="text: 'Piapro', attr: { href: $root.getPvUrl($data) }"></a></li>
 					</ul>
-
-					<!-- ko if: $data.producers -->
-					<h3>Producers</h3>
-					<div data-bind="template: { name: 'artists-template', data: producers }"></div>
-					<!-- /ko -->
-
-					<!-- ko if: $data.vocalists -->
-					<h3>Vocalists</h3>
-					<div data-bind="template: { name: 'artists-template', data: vocalists }"></div>
-					<!-- /ko -->
+					
+					<h3>Artists</h3>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Artist</th>
+								<th>Roles</th>
+								<th>VocaDB</th>
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: $parent.artists">
+							<tr>
+								<td data-bind="text: name"></td>
+								<td data-bind="text: roles"></td>
+								<td>
+									<div data-bind="visible: vocaDbId" class="input-group">
+										<a data-bind="attr: { href: url }" class="input-group-addon">
+											<span><i class="glyphicon glyphicon-globe"></i></span>
+										</a>
+										<input type="text" class="form-control" data-bind="value: vocaDbName" readonly />
+										<span class="input-group-btn" data-bind="visible: editable">
+											<button type="submit" data-bind="click: remove" class="btn btn-danger">Remove</button>
+										</span>
+									</div>
+									<div data-bind="visible: !vocaDbId()">
+										<input type="text" class="form-control" data-bind="artistAutoComplete: artist, value: autoCompleteName" placeholder="Search VocaDB" autocomplete="off" />
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<!-- ko if: $data.lyrics -->
 					<h3>Lyrics</h3>
@@ -106,6 +127,7 @@
 	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

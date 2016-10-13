@@ -29,6 +29,7 @@ declare namespace vdb {
 
 	interface Artist {
 		id?: number;
+		name: string;
 	}
 
 	interface Lyrics {

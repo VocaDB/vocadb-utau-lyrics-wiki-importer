@@ -12,6 +12,7 @@
 		"typings/lodash.d.ts",
 		"typings/utaulyrics.d.ts",
 		"typings/vocadb.d.ts",
+		"artistAutoComplete.ts",
 		"mapper.ts",
 		"viewModel.ts",
 		"app.ts"
