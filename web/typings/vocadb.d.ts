@@ -11,7 +11,7 @@ declare namespace vdb {
 		webLinks?: WebLink[];
 	}
 
-	type ArtistRole = "Composer" | "Arranger" | "Lyricist" | "Mastering" | "Illustrator" | "Vocalist";
+	type ArtistRole = "Composer" | "Arranger" | "Lyricist" | "Mastering" | "Illustrator" | "Vocalist" | "Animator";
 
 	type Language = "Unspecified" | "Japanese" | "Romaji" | "English";
 

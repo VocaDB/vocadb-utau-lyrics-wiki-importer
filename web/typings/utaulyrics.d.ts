@@ -15,7 +15,7 @@ declare namespace utaulyrics {
 		type: "original" | "romanized" | "translation";
 	}
 
-	type MediaService = "yt" | "nn" | "pp";
+	type MediaService = "yt" | "nn" | "pp" | "sc";
 
 	interface Media {
 		id: string;

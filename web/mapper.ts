@@ -8,6 +8,7 @@ namespace mapper {
 				case "yt": return "https://youtu.be/" + pv.id;
 				case "nn": return "http://nicovideo.jp/watch/" + pv.id;
 				case "pp": return "http://piapro.jp/t/" + pv.id;
+				case "sc": return "https://soundcloud.com/" + pv.id;
 				default: return null;
 			}
 
@@ -33,7 +34,7 @@ namespace mapper {
 				.value();
 
 			var vdbArtist: vdb.ArtistForSong = {
-				artist: (artist.vocadb ? { id: parseInt(artist.vocadb) } : null),
+				artist: (artist.vocadb ? { id: parseInt(artist.vocadb), name: artist.name } : null),
 				isSupport: false,
 				name: artist.name,
 				roles: roles

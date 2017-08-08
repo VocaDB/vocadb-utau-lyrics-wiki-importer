@@ -4,3 +4,4 @@ packages/
 *.user
 *.vspx
 .vs/config/applicationhost.config
+/.vs
