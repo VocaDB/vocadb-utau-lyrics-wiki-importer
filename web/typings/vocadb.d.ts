@@ -5,7 +5,7 @@ declare namespace vdb {
 		artists: ArtistForSong[];
 		lyrics?: Lyrics[];
 		names: LocalizedString[];
-		pvUrl?: string;
+		pvUrls?: string[];
 		songType: "Original" | "Cover" | "Remix";
 		updateNotes?: string;
 		webLinks?: WebLink[];

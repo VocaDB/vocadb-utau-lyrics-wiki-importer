@@ -93,7 +93,7 @@ namespace mapper {
 				.filter(n => n.value != null)
 				.value();
 
-			var pvUrl: string = result.media.length ? this.getPvUrl(result.media[0]) : null;
+			var pvUrls: string[] = result.media.length ? _.map(result.media, media => this.getPvUrl(media)) : [];
 
 			var lyrics: vdb.Lyrics[] = _.map(result.lyrics, this.mapLyrics);
 
@@ -105,7 +105,7 @@ namespace mapper {
 				artists: artists,
 				lyrics: lyrics,
 				names: names,
-				pvUrl: pvUrl,
+				pvUrls: pvUrls,
 				songType: "Original",
 				updateNotes: "Imported from UTAU Lyrics Wiki",
 				webLinks: webLinks
